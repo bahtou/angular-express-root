@@ -4,10 +4,14 @@ var aerApp = angular.module('aerApp');
 
 aerApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
-    $routerProvider
+    $routeProvider
       .when('/about', {
         templateUrl: '/views/pages/about.html',
         controller: 'aboutController'
+      })
+      .when('/home', {
+        templateUrl: '/views/pages/home.html',
+        controller: 'homeController'
       })
       .otherwise({
         redirectTo: '/'

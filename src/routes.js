@@ -14,7 +14,7 @@ module.exports = function(app) {
     res.render('index', {
       app: {
         title: 'AER',
-        name: 'angular-express-root'
+        name: 'Angular-Express-Root'
       }
     });
   });

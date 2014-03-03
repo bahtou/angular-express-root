@@ -8,8 +8,8 @@ html(lang="en", ng-app="aerApp")
     link(rel="stylesheet", href="stylesheets/style.css")
   body
     block content
-    h1= app.title
-    p Welcome to #{app.name}
+    h1 something at least
+    div(ng-view)
 
     block scripts
     script(src="javascripts/app/lib/angular-1.2.13/angular.js")
