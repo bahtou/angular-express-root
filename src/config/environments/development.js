@@ -8,6 +8,10 @@ module.exports = {
   logging: {
     level: 'debug',
     colorize: true
+  },
+
+  assets: {
+    precompiled: false
   }
 
 };

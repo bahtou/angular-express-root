@@ -8,6 +8,7 @@ var express = require('express');
 
 var app = express();
 var config = require('./config');
+var i18n = require('./lib/i18next');
 var routes = require('./routes');
 var initializers = require('./initializers');
 var path = require('path');
@@ -22,26 +23,34 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
-app.use(express.static(path.join(config.root, 'assets')));
-console.log(path.join(config.root, 'assets'));
 app.use(express.favicon());
 
-/*
- * Initialize db
- */
+//initialize the database
 initializers.db(app);
+
+//register translation service
+app.use(i18n.handle);
 
 if (config.logging.level === 'debug') {
   // todo, pipe this through a winston stream
   app.use(express.logger('dev'));
 }
 
+//initialize assets
+initializers.assets(app);
+
 app.use(app.router);
 
 // development only
 if ('development' == config.env) {
-  app.use(express.errorHandler());
+  app.use(express.errorHandler({showStack: true, dumpExceptions: true}));
+  app.locals.pretty = true;
 }
+
+i18n
+  .registerAppHelper(app)
+  .serveDynamicResources(app)
+  .serveMissingKeyRoute(app);
 
 routes(app);
 

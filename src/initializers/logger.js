@@ -12,7 +12,20 @@ if (config.logging.fileLogging) {
         level: config.logging.level,
         colorize: config.logging.colorize,
         timestamp: true,
-        filename: config.logging.filename
+        filename: config.logging.filename,
+        stringify: function(output) {
+          var toWrite = _.pick(output, 'timestamp', 'level');
+
+          delete output['timestamp'];
+          delete output['level'];
+          _.extend(toWrite, output);
+
+          return JSON.stringify(toWrite, function (key, value) {
+            return value instanceof Buffer
+              ? value.toString('base64')
+              : value;
+          });
+        }
       })
     ]
   });

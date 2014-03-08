@@ -4,19 +4,19 @@ html(lang="en", ng-app="aerApp")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    //- title= app.title
-    link(rel="stylesheet", href="stylesheets/style.css")
+    title= app.title
+
+    link(rel="stylesheet", href= assets.url("/assets/application.css"))
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="<%= assets.url('/assets/application-ie.js') %>"></script>
+    <![endif]-->
+
   body
     block content
-    h1 something at least
     div(ng-view)
 
     block scripts
-    script(src="javascripts/app/lib/angular-1.2.13/angular.js")
-    script(src="javascripts/app/lib/angular-1.2.13/angular-route.js")
-    script(src="javascripts/app/app.js")
-    script(src="javascripts/app/routes.js")
-    script(src="javascripts/app/controllers.js")
-    script(src="javascripts/app/directives.js")
-    script(src="javascripts/app/filters.js")
-    script(src="javascripts/app/services.js")
+    script(type="text/javascript", src= assets.url("/assets/application.js")).
+    //- script(type="text/javascript").
+    //-   window.language= i18n.language()

@@ -6,9 +6,12 @@
     "start": "nodemon ./src/app.js"
   },
   "dependencies": {
+    "i18next": "^1.7.1",
     "express": "3.4.8",
     "jade": "*",
     "node.extend": "^1.0.9",
+    "smaller-asset-rack": "0.0.3",
+    "underscore": "^1.6.0",
     "winston": "^0.7.2"
   },
   "devDependencies": {
