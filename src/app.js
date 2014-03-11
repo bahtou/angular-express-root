@@ -8,7 +8,6 @@ var express = require('express');
 
 var app = express();
 var config = require('./config');
-var i18n = require('./lib/i18next');
 var routes = require('./routes');
 var initializers = require('./initializers');
 var path = require('path');
@@ -28,9 +27,6 @@ app.use(express.favicon());
 //initialize the database
 initializers.db(app);
 
-//register translation service
-app.use(i18n.handle);
-
 if (config.logging.level === 'debug') {
   // todo, pipe this through a winston stream
   app.use(express.logger('dev'));
@@ -46,11 +42,6 @@ if ('development' == config.env) {
   app.use(express.errorHandler({showStack: true, dumpExceptions: true}));
   app.locals.pretty = true;
 }
-
-i18n
-  .registerAppHelper(app)
-  .serveDynamicResources(app)
-  .serveMissingKeyRoute(app);
 
 routes(app);
 
